@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cloud Dictionary</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>☁️ Cloud Dictionary</h1>
+    <p class="subtitle">Search AWS and cloud computing terms instantly</p>
+
+    <div class="search-box">
+      <input type="text" id="termInput" placeholder="Enter cloud term (e.g. Lambda)">
+      <button onclick="searchTerm()">Search</button>
+    </div>
+
+    <div id="resultCard" class="result-card hidden">
+      <h2 id="resultTitle"></h2>
+      <p id="resultText"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
