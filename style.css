@@ -6,28 +6,26 @@
 }
 
 body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #1e3a8a, #38bdf8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
 }
 
 .container {
-  width: 700px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 40px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: white;
+  width: 80%;
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
 }
 
 h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
+  text-align: center;
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #60a5fa, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .subtitle {
@@ -66,14 +64,80 @@ button:hover {
   transform: translateY(-2px);
 }
 
-.result-card {
-  background: rgba(255,255,255,0.15);
-  padding: 25px;
-  border-radius: 18px;
-  line-height: 1.6;
-  border: 1px solid rgba(255,255,255,0.15);
+result-card button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #111827;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .hidden {
   display: none;
+}
+.chat-box {
+  height: 450px;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.user-msg {
+  text-align: right;
+  margin: 10px 0;
+  background: #2563eb;
+  padding: 10px;
+  border-radius: 12px;
+  color: white;
+}
+
+.ai-msg {
+  text-align: left;
+  margin: 10px 0;
+  background: #111827;
+  padding: 10px;
+  border-radius: 12px;
+  color: white;
+}
+.prompt-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.prompt-chips button {
+  border: none;
+  padding: 10px 14px;
+  border-radius: 20px;
+  background: #1f2937;
+  color: white;
+  cursor: pointer;
+}
+.search-box {
+  display: flex;
+  gap: 10px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+}
+
+.search-box button {
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
 }

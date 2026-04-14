@@ -8,17 +8,20 @@
 </head>
 <body>
   <div class="container">
-    <h1>☁️ Cloud Dictionary</h1>
-    <p class="subtitle">Search AWS and cloud computing terms instantly</p>
+    <h1>☁️ AI Cloud Tutor</h1>
+    <p class="subtitle">Ask any cloud concept like a chatbot</p>
 
+    <div id="chatBox" class="chat-box"></div>
+     <div class="prompt-chips">
+     <button onclick="usePrompt('What is AWS Lambda?')"> ☁️ Lambda </button>
+     <button onclick="usePrompt('Compare S3 and EBS')">🔁 S3 vs EBS </button>
+     <button onclick="usePrompt('Explain Docker')">🐳 Docker</button>
+     <button onclick="usePrompt('AWS DevOps roadmap')">🚀 DevOps</button>
+ </div>
+ 
     <div class="search-box">
-      <input type="text" id="termInput" placeholder="Enter cloud term (e.g. Lambda)">
-      <button onclick="searchTerm()">Search</button>
-    </div>
-
-    <div id="resultCard" class="result-card hidden">
-      <h2 id="resultTitle"></h2>
-      <p id="resultText"></p>
+      <input type="text" id="termInput" placeholder="Ask something...">
+      <button onclick="sendMessage()">Send</button>
     </div>
   </div>
 
