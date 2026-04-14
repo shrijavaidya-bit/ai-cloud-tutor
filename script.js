@@ -18,12 +18,12 @@ async function sendMessage() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
-        const response = await fetch(
-            "https://9j65ujd57j.execute-api.us-east-1.amazonaws.com/prod/AIExplainCloudTerm?term=" +
-            encodeURIComponent(question)
-        );
+        const API_URL =
+    "https://9j65ujd57j.execute-api.us-east-1.amazonaws.com/prod/ai-explain?term=" +
+     encodeURIComponent(question);URIComponent(question);
+        
 
-        const result = await response.json();
+       const result = await response.json();
         const data =
             typeof result.body === "string"
                 ? JSON.parse(result.body)
