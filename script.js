@@ -4,46 +4,26 @@ function setPrompt(text) {
 }
 
 async function sendMessage() {
-    const input = document.getElementById("termInput");
+    const input = document.getElementById("userInput");
     const chatBox = document.getElementById("chatBox");
 
-    const question = input.value.trim();
-    if (!question) return;
+    const userText = input.value.trim();
+    if (!userText) return;
 
-    chatBox.innerHTML += `<div class="user-msg">🧑 ${question}</div>`;
+    chatBox.innerHTML += `<div class="user-msg">🧑 ${userText}</div>`;
     input.value = "";
-
-    chatBox.innerHTML += `<div class="ai-msg" id="loadingMsg">🤖 Thinking...</div>`;
-    chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
         const response = await fetch(
-            "https://9j65ujd57j.execute-api.us-east-1.amazonaws.com/prod/ai-explain?term=" +
-            encodeURIComponent(question)
+            `https://9j65ujd57j.execute-api.us-east-1.amazonaws.com/prod/ai-explain?term=${encodeURIComponent(userText)}`
         );
 
-        const result = await response.json();
+        const data = await response.json();
+        console.log("API DATA:", data);
 
-        document.getElementById("loadingMsg")?.remove();
-
-        let answer = "";
-
-        if (result.aiExplanation) {
-            answer = result.aiExplanation;
-        } else if (result.body) {
-            const parsed =
-                typeof result.body === "string"
-                    ? JSON.parse(result.body)
-                    : result.body;
-            answer = parsed.aiExplanation || parsed.error || "No response";
-        } else {
-            answer = "No response";
-        }
-
-        chatBox.innerHTML += `<div class="ai-msg">🤖 ${answer}</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
+        chatBox.innerHTML += `<div class="bot-msg">🤖 ${data.aiExplanation}</div>`;
     } catch (error) {
-        document.getElementById("loadingMsg")?.remove();
-        chatBox.innerHTML += `<div class="ai-msg">⚠️ ${error.message}</div>`;
+        console.error(error);
+        chatBox.innerHTML += `<div class="bot-msg">⚠️ Failed to fetch</div>`;
     }
 }
