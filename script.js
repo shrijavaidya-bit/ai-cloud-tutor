@@ -1,20 +1,20 @@
-window.onload = function () {
-    const savedChats = localStorage.getItem("chatHistory");
-    if (savedChats) {
-        document.getElementById("chatBox").innerHTML = savedChats;
-    }
-};
+function setPrompt(text) {
+    document.getElementById("termInput").value = text;
+    sendMessage();
+}
+
 async function sendMessage() {
     const input = document.getElementById("termInput");
+    const chatBox = document.getElementById("chatBox");
+
     const question = input.value.trim();
     if (!question) return;
-
-    const chatBox = document.getElementById("chatBox");
 
     chatBox.innerHTML += `<div class="user-msg">🧑 ${question}</div>`;
     input.value = "";
 
     chatBox.innerHTML += `<div class="ai-msg" id="loadingMsg">🤖 Thinking...</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
 
     try {
         const response = await fetch(
@@ -23,13 +23,25 @@ async function sendMessage() {
         );
 
         const result = await response.json();
-        const data = result;
 
         document.getElementById("loadingMsg")?.remove();
 
-        chatBox.innerHTML += `<div class="ai-msg">🤖 ${
-            data.aiExplanation || data.error || "No response"
-        }</div>`;
+        let answer = "";
+
+        if (result.aiExplanation) {
+            answer = result.aiExplanation;
+        } else if (result.body) {
+            const parsed =
+                typeof result.body === "string"
+                    ? JSON.parse(result.body)
+                    : result.body;
+            answer = parsed.aiExplanation || parsed.error || "No response";
+        } else {
+            answer = "No response";
+        }
+
+        chatBox.innerHTML += `<div class="ai-msg">🤖 ${answer}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
     } catch (error) {
         document.getElementById("loadingMsg")?.remove();
         chatBox.innerHTML += `<div class="ai-msg">⚠️ ${error.message}</div>`;
