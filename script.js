@@ -23,10 +23,7 @@ async function sendMessage() {
         );
 
         const result = await response.json();
-        const data =
-            typeof result.body === "string"
-                ? JSON.parse(result.body)
-                : result;
+        const data = result;
 
         document.getElementById("loadingMsg")?.remove();
 
